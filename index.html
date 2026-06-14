@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skin Solutions by 712 — Advanced Skincare & Facial Treatments</title>
+  <meta name="description" content="Skin Solutions by 712 — Premium skincare products and advanced facial treatments powered by modern technology. Reveal your best skin." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:       #3DB015;
+      --teal:        #1A5C52;
+      --green-light: #F0FDF4;
+      --green-mid:   #D1FAE5;
+      --green-dark:  #0F3D2E;
+      --white:       #FFFFFF;
+      --dark:        #111827;
+      --gray:        #6B7280;
+      --gray-light:  #F9FAFB;
+      --border:      rgba(61,176,21,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1.15;
+    }
+
+    /* ── NAVBAR ─────────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    .nav.scrolled { box-shadow: 0 4px 24px rgba(26,92,82,0.1); }
+
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 24px; height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      height: 48px; width: auto; object-fit: contain;
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--dark);
+      font-size: 0.88rem; font-weight: 500; letter-spacing: 0.01em;
+      transition: color 0.2s; cursor: pointer;
+    }
+    .nav-links a:hover { color: var(--green); }
+
+    .btn-book {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--teal); color: var(--white) !important;
+      padding: 11px 26px; border-radius: 4px;
+      font-weight: 600; font-size: 0.85rem; letter-spacing: 0.02em;
+      text-decoration: none; transition: all 0.2s;
+      cursor: pointer; border: none; white-space: nowrap;
+    }
+    .btn-book:hover {
+      background: var(--green-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(26,92,82,0.35);
+    }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburger span { width: 24px; height: 2px; background: var(--dark); border-radius: 2px; transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed;
+      top: 72px; left: 0; right: 0; z-index: 99;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 20px 24px 28px;
+      flex-direction: column; gap: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      text-decoration: none; color: var(--dark);
+      font-size: 1rem; font-weight: 500;
+      padding: 8px 0; border-bottom: 1px solid var(--green-light); cursor: pointer;
+    }
+    .mobile-menu .btn-book { text-align: center; justify-content: center; margin-top: 8px; border-radius: 4px; }
+
+    /* ── HERO SLIDESHOW ──────────────────────────────────── */
+    .hero {
+      position: relative; height: 100vh; min-height: 640px; overflow: hidden;
+    }
+
+    .hero-slides { position: absolute; inset: 0; }
+    .hero-slide {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: 0; transform: scale(1.04);
+      transition: opacity 1.4s ease, transform 7s ease;
+    }
+    .hero-slide.active { opacity: 1; transform: scale(1); }
+
+    .hero-slide:nth-child(1) {
+      background-image: url('https://images.unsplash.com/photo-1609535895148-cf9f5c446290?w=1920&q=85&auto=format&fit=crop');
+    }
+    .hero-slide:nth-child(2) {
+      background-image: url('https://images.unsplash.com/photo-1693004927824-f2623bbedc8b?w=1920&q=85&auto=format&fit=crop');
+    }
+    .hero-slide:nth-child(3) {
+      background-image: url('https://images.unsplash.com/photo-1648203276014-20f97ba1f817?w=1920&q=85&auto=format&fit=crop');
+    }
+    .hero-slide:nth-child(4) {
+      background-image: url('https://images.unsplash.com/photo-1702261952318-241e4594b2f5?w=1920&q=85&auto=format&fit=crop');
+    }
+
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(
+        135deg,
+        rgba(15,61,46,0.78) 0%,
+        rgba(26,92,82,0.55) 50%,
+        rgba(61,176,21,0.15) 100%
+      );
+    }
+
+    .slide-arrow {
+      position: absolute; top: 50%; z-index: 10;
+      transform: translateY(-50%);
+      width: 48px; height: 48px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 50%; color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s;
+      backdrop-filter: blur(8px);
+    }
+    .slide-arrow:hover { background: var(--green); border-color: var(--green); }
+    .slide-arrow.prev { left: 24px; }
+    .slide-arrow.next { right: 24px; }
+
+    .slide-dots {
+      position: absolute; bottom: 36px; left: 50%;
+      transform: translateX(-50%); z-index: 10;
+      display: flex; gap: 10px; align-items: center;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      border: none; cursor: pointer; transition: all 0.3s; padding: 0;
+    }
+    .dot.active { background: var(--green); width: 24px; border-radius: 4px; }
+
+    .hero-content {
+      position: absolute; inset: 0; z-index: 5;
+      display: flex; align-items: center;
+      padding: 100px 24px 80px;
+    }
+    .hero-inner {
+      max-width: 1200px; width: 100%; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 420px;
+      gap: 60px; align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(61,176,21,0.15);
+      border: 1px solid rgba(61,176,21,0.35);
+      color: #86EFAC; padding: 6px 16px; border-radius: 2px;
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow span { width: 5px; height: 5px; background: #4ADE80; border-radius: 50%; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+      font-weight: 600; color: var(--white);
+      line-height: 1.08; margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: italic; color: #86EFAC;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem; color: rgba(255,255,255,0.72);
+      margin-bottom: 36px; max-width: 520px;
+      font-weight: 300; line-height: 1.8;
+    }
+
+    .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+    .btn-hero {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--green); color: var(--white);
+      padding: 15px 34px; border-radius: 4px;
+      font-weight: 600; font-size: 0.95rem; text-decoration: none;
+      transition: all 0.3s; cursor: pointer;
+      box-shadow: 0 8px 32px rgba(61,176,21,0.45);
+      letter-spacing: 0.01em;
+    }
+    .btn-hero:hover { background: #32A012; transform: translateY(-2px); box-shadow: 0 16px 48px rgba(61,176,21,0.5); }
+
+    .btn-hero-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      color: var(--white); padding: 14px 28px; border-radius: 4px;
+      font-weight: 500; font-size: 0.95rem;
+      text-decoration: none; transition: all 0.3s; cursor: pointer;
+    }
+    .btn-hero-ghost:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.08); }
+
+    .hero-stats { display: flex; gap: 40px; margin-top: 48px; flex-wrap: wrap; }
+    .hero-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; font-weight: 600; color: var(--white); display: block;
+    }
+    .hero-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* Right panel */
+    .hero-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 32px;
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .caption-slide { display: none; }
+    .caption-slide.active { display: block; }
+    .caption-label {
+      font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: #86EFAC; margin-bottom: 8px;
+    }
+    .caption-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600; color: var(--white);
+      margin-bottom: 8px;
+    }
+    .caption-desc { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.7; }
+    .caption-divider { height: 1px; background: rgba(255,255,255,0.1); }
+    .caption-meta { display: flex; align-items: center; gap: 14px; }
+    .caption-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(61,176,21,0.2);
+      border: 1px solid rgba(61,176,21,0.35);
+      color: #86EFAC; padding: 5px 12px; border-radius: 2px;
+      font-size: 0.75rem; font-weight: 600;
+    }
+    .caption-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--green); color: var(--white);
+      padding: 8px 18px; border-radius: 4px;
+      font-size: 0.82rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s; cursor: pointer;
+    }
+    .caption-cta:hover { background: #32A012; }
+
+    /* ── GREEN STRIPE ──────────────────────────────────── */
+    .stripe {
+      height: 4px;
+      background: linear-gradient(90deg, var(--teal) 0%, var(--green) 50%, #86EFAC 100%);
+    }
+
+    /* ── SECTION SHARED ─────────────────────────────────── */
+    section { padding: 100px 24px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--green);
+      margin-bottom: 14px;
+    }
+    .section-tag::before { content: ''; width: 20px; height: 2px; background: var(--green); border-radius: 2px; }
+
+    .section-title {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 600; color: var(--dark);
+      margin-bottom: 16px;
+    }
+    .section-sub { font-size: 1rem; color: var(--gray); max-width: 560px; line-height: 1.75; font-weight: 300; }
+
+    /* Scroll animations */
+    .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+    .fade-in-delay-4 { transition-delay: 0.4s; }
+
+    /* ── SERVICES ────────────────────────────────────────── */
+    .services { background: var(--gray-light); }
+    .services-header { margin-bottom: 56px; }
+
+    .services-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    }
+
+    .service-card {
+      background: var(--white); border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--border); transition: all 0.3s; cursor: default;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 56px rgba(26,92,82,0.14);
+      border-color: rgba(61,176,21,0.3);
+    }
+
+    .service-img { width: 100%; height: 220px; overflow: hidden; }
+    .service-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .service-card:hover .service-img img { transform: scale(1.06); }
+
+    .service-body { padding: 24px 22px 28px; }
+    .service-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+    .si-green { background: rgba(61,176,21,0.1); }
+    .si-teal  { background: rgba(26,92,82,0.1); }
+
+    .service-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 600; color: var(--dark); margin-bottom: 8px;
+    }
+    .service-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.65; font-weight: 300; }
+
+    .service-tag {
+      display: inline-flex; align-items: center;
+      margin-top: 14px;
+      font-size: 0.72rem; font-weight: 600;
+      color: var(--green); letter-spacing: 0.06em; text-transform: uppercase;
+      gap: 4px;
+    }
+
+    /* ── TECHNOLOGY SECTION ─────────────────────────────── */
+    .tech-section { background: var(--white); }
+    .tech-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .tech-image {
+      border-radius: 12px; overflow: hidden; position: relative;
+    }
+    .tech-image img { width: 100%; height: 520px; object-fit: cover; display: block; }
+    .tech-image-badge {
+      position: absolute; bottom: 24px; left: 24px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 8px; padding: 16px 20px;
+      display: flex; align-items: center; gap: 14px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+    .tech-badge-icon {
+      width: 44px; height: 44px; border-radius: 8px;
+      background: var(--green-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .tech-badge-title { font-weight: 700; font-size: 0.9rem; color: var(--dark); }
+    .tech-badge-sub { font-size: 0.75rem; color: var(--gray); }
+
+    .tech-features { display: flex; flex-direction: column; gap: 24px; margin-top: 36px; }
+    .tech-feature {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 20px; border-radius: 8px; border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .tech-feature:hover { background: var(--green-light); border-color: rgba(61,176,21,0.25); }
+    .tech-feature-icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: var(--teal); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .tech-feature-title { font-weight: 600; font-size: 0.95rem; color: var(--dark); margin-bottom: 4px; }
+    .tech-feature-desc { font-size: 0.82rem; color: var(--gray); line-height: 1.6; font-weight: 300; }
+
+    /* ── PRODUCTS STRIP ─────────────────────────────────── */
+    .products { background: var(--teal); padding: 80px 24px; }
+    .products-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: center;
+    }
+    .products .section-tag { color: #86EFAC; }
+    .products .section-tag::before { background: #86EFAC; }
+    .products .section-title { color: var(--white); }
+    .products .section-sub { color: rgba(255,255,255,0.65); }
+
+    .products-list { display: flex; flex-direction: column; gap: 16px; }
+    .product-item {
+      display: flex; align-items: center; gap: 16px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 16px 20px;
+      transition: all 0.2s;
+    }
+    .product-item:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); }
+    .product-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 700; color: var(--green);
+      min-width: 32px;
+    }
+    .product-name { font-weight: 600; font-size: 0.95rem; color: var(--white); margin-bottom: 2px; }
+    .product-desc { font-size: 0.8rem; color: rgba(255,255,255,0.55); font-weight: 300; }
+    .product-arrow { margin-left: auto; color: rgba(255,255,255,0.35); flex-shrink: 0; }
+
+    /* ── WHY US ─────────────────────────────────────────── */
+    .why { background: var(--green-light); }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 56px; }
+
+    .why-card {
+      background: var(--white); border-radius: 10px;
+      padding: 36px 28px; text-align: center;
+      border: 1px solid var(--border); transition: all 0.3s;
+    }
+    .why-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(26,92,82,0.1); }
+
+    .why-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .wi-green { background: rgba(61,176,21,0.12); }
+    .wi-teal  { background: rgba(26,92,82,0.1); }
+    .wi-light { background: var(--green-mid); }
+
+    .why-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600; color: var(--dark); margin-bottom: 10px;
+    }
+    .why-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.7; font-weight: 300; }
+
+    /* ── TESTIMONIALS ────────────────────────────────────── */
+    .testimonials { background: var(--white); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+
+    .testi-card {
+      border-radius: 10px; padding: 32px 28px;
+      border: 1px solid var(--border); transition: all 0.3s;
+      position: relative;
+    }
+    .testi-card::before {
+      content: '"';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem; line-height: 1;
+      color: var(--green); opacity: 0.15;
+      position: absolute; top: 16px; left: 22px;
+    }
+    .testi-card:hover { background: var(--green-light); border-color: rgba(61,176,21,0.25); }
+
+    .stars { display: flex; gap: 3px; margin-bottom: 14px; }
+    .star { color: var(--green); font-size: 0.9rem; }
+
+    .testi-text { font-size: 0.93rem; color: #374151; line-height: 1.8; margin-bottom: 24px; font-style: italic; font-weight: 300; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700; font-size: 1.1rem; color: var(--white); flex-shrink: 0;
+    }
+    .av-green { background: linear-gradient(135deg, var(--green), #2D8A0E); }
+    .av-teal  { background: linear-gradient(135deg, var(--teal), #0F3D2E); }
+    .av-mid   { background: linear-gradient(135deg, #16A34A, #15803D); }
+
+    .testi-name { font-weight: 600; font-size: 0.9rem; color: var(--dark); }
+    .testi-role { font-size: 0.75rem; color: var(--gray); }
+
+    /* ── CTA ─────────────────────────────────────────────── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--teal) 60%, #1A7A50 100%);
+      padding: 100px 24px; text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 360px; height: 360px;
+      background: rgba(61,176,21,0.15); border-radius: 50%;
+    }
+    .cta-section::after {
+      content: ''; position: absolute; bottom: -100px; left: -60px;
+      width: 280px; height: 280px;
+      background: rgba(134,239,172,0.1); border-radius: 50%;
+    }
+    .cta-inner { position: relative; z-index: 2; }
+
+    .cta-tag {
+      display: inline-block; background: rgba(255,255,255,0.12); color: #86EFAC;
+      padding: 6px 18px; border-radius: 2px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 20px;
+    }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 600;
+      color: var(--white); margin-bottom: 16px;
+    }
+    .cta-title em { font-style: italic; color: #86EFAC; }
+    .cta-sub { font-size: 1rem; color: rgba(255,255,255,0.72); margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.8; font-weight: 300; }
+
+    .btn-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--white); color: var(--teal);
+      padding: 16px 44px; border-radius: 4px;
+      font-weight: 700; font-size: 1rem;
+      text-decoration: none; transition: all 0.3s; cursor: pointer;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+    .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,0.25); }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer { background: var(--green-dark); color: rgba(255,255,255,0.55); padding: 60px 24px 32px; }
+
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px;
+      padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo img { height: 44px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.9; }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--white); }
+    .footer-tagline { font-size: 0.88rem; margin-bottom: 24px; line-height: 1.7; font-weight: 300; }
+
+    .social-links { display: flex; gap: 10px; }
+    .social-link {
+      width: 38px; height: 38px; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; color: rgba(255,255,255,0.5); transition: all 0.2s;
+    }
+    .social-link:hover { background: var(--green); border-color: var(--green); color: var(--white); transform: translateY(-2px); }
+
+    .footer-col h4 {
+      font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em; color: var(--white); margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a { text-decoration: none; color: rgba(255,255,255,0.45); font-size: 0.88rem; transition: color 0.2s; cursor: pointer; font-weight: 300; }
+    .footer-links a:hover { color: #86EFAC; }
+
+    .footer-bottom {
+      max-width: 1200px; margin: 28px auto 0;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.8rem; flex-wrap: wrap; gap: 8px;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-card { display: none; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .tech-inner { grid-template-columns: 1fr; gap: 40px; }
+      .tech-image img { height: 360px; }
+      .products-inner { grid-template-columns: 1fr; gap: 40px; }
+      .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-inner .btn-book { display: none; }
+      .hamburger { display: flex; }
+      .hero h1 { font-size: 2.4rem; }
+      .hero-actions { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-content { text-align: center; }
+      .slide-arrow { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 68px 20px; }
+      .hero-sub { font-size: 0.95rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in { transition: none; }
+      .hero-slide { transition: opacity 0.3s; transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="nav" id="navbar" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo" aria-label="Skin Solutions by 712 Home">
+      <img src="logo.jpeg" alt="Skin Solutions by 712" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#technology">Technology</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="btn-book">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Book Consultation
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="#services" class="mobile-link">Services</a>
+  <a href="#technology" class="mobile-link">Technology</a>
+  <a href="#products" class="mobile-link">Products</a>
+  <a href="#testimonials" class="mobile-link">Reviews</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+  <a href="#contact" class="btn-book">Book Consultation</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="hero" aria-label="Hero">
+  <div class="hero-slides" aria-hidden="true">
+    <div class="hero-slide active"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+  </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <button class="slide-arrow prev" id="slidePrev" aria-label="Previous slide">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="slide-arrow next" id="slideNext" aria-label="Next slide">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <div class="slide-dots" role="tablist" aria-label="Slide navigation">
+    <button class="dot active" role="tab" aria-selected="true"  aria-label="Slide 1"></button>
+    <button class="dot"        role="tab" aria-selected="false" aria-label="Slide 2"></button>
+    <button class="dot"        role="tab" aria-selected="false" aria-label="Slide 3"></button>
+    <button class="dot"        role="tab" aria-selected="false" aria-label="Slide 4"></button>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow fade-in">
+          <span aria-hidden="true"></span>
+          Advanced Skincare Science
+        </div>
+        <h1 class="fade-in fade-in-delay-1">
+          Reveal Your<br/><em>Most Radiant</em><br/>Skin Yet
+        </h1>
+        <p class="hero-sub fade-in fade-in-delay-2">
+          Skin Solutions by 712 blends cutting-edge technology with nature's finest ingredients — delivering visible results through expert facial treatments and premium skincare products.
+        </p>
+        <div class="hero-actions fade-in fade-in-delay-3">
+          <a href="#contact" class="btn-hero">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Book a Consultation
+          </a>
+          <a href="#services" class="btn-hero-ghost">
+            Our Services
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </a>
+        </div>
+        <div class="hero-stats fade-in fade-in-delay-4">
+          <div>
+            <span class="hero-stat-num" data-count="500">0</span>
+            <span class="hero-stat-label">Happy Clients</span>
+          </div>
+          <div>
+            <span class="hero-stat-num" data-count="12">0</span>
+            <span class="hero-stat-label">Treatments</span>
+          </div>
+          <div>
+            <span class="hero-stat-num" data-count="5">0</span>
+            <span class="hero-stat-label">Years Experience</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right caption card -->
+      <div class="hero-card fade-in fade-in-delay-2" aria-live="polite">
+        <div class="caption-slide active">
+          <div class="caption-label">Facial Treatments</div>
+          <div class="caption-title">Glow From Within</div>
+          <div class="caption-desc">Professional facial treatments tailored to your unique skin type — from deep cleansing to advanced rejuvenation therapy.</div>
+        </div>
+        <div class="caption-slide">
+          <div class="caption-label">Skincare Products</div>
+          <div class="caption-title">Science-Backed Formulas</div>
+          <div class="caption-desc">Our curated range of premium skincare products uses clinically proven ingredients to nourish, protect, and transform your skin.</div>
+        </div>
+        <div class="caption-slide">
+          <div class="caption-label">Skin Consultations</div>
+          <div class="caption-title">Personalised Skin Analysis</div>
+          <div class="caption-desc">Every skin is unique. Our experts assess your skin's needs and craft a personalised treatment plan just for you.</div>
+        </div>
+        <div class="caption-slide">
+          <div class="caption-label">Advanced Technology</div>
+          <div class="caption-title">Modern Skin Tech</div>
+          <div class="caption-desc">LED therapy, radiofrequency, ultrasound — we bring the latest in dermatological technology to give you faster, better results.</div>
+        </div>
+        <div class="caption-divider"></div>
+        <div class="caption-meta">
+          <span class="caption-tag">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            5.0 Rated
+          </span>
+          <a href="#contact" class="caption-cta">
+            Book Now
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stripe" aria-hidden="true"></div>
+
+<!-- ── SERVICES ── -->
+<section class="services" id="services" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-tag fade-in">What We Offer</div>
+      <h2 class="section-title fade-in fade-in-delay-1" id="services-heading">
+        Treatments Designed<br/>for Visible Results
+      </h2>
+      <p class="section-sub fade-in fade-in-delay-2">
+        Every service combines expert hands, premium products, and innovative technology for skin transformations that last.
+      </p>
+    </div>
+    <div class="services-grid">
+
+      <!-- Facials -->
+      <div class="service-card fade-in fade-in-delay-1">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1609535895148-cf9f5c446290?w=600&q=80&auto=format&fit=crop" alt="Professional facial treatment" loading="lazy" />
+        </div>
+        <div class="service-body">
+          <div class="service-icon si-green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3DB015" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="service-name">Facial Treatments</div>
+          <div class="service-desc">Deep cleansing, hydration facials, anti-ageing treatments, and more — all customised to your skin's unique needs.</div>
+          <div class="service-tag">
+            From deep cleanse to glow
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products -->
+      <div class="service-card fade-in fade-in-delay-2">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1577746838851-816a43ca8733?w=600&q=80&auto=format&fit=crop" alt="Premium skincare products" loading="lazy" />
+        </div>
+        <div class="service-body">
+          <div class="service-icon si-teal">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A5C52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h5"/><path d="M20 2h-5v8h5a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><rect x="2" y="12" width="20" height="8" rx="2"/></svg>
+          </div>
+          <div class="service-name">Skincare Products</div>
+          <div class="service-desc">Science-backed serums, moisturisers, cleansers, and treatments carefully selected to complement your skincare routine.</div>
+          <div class="service-tag">
+            Premium formulations
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Technology -->
+      <div class="service-card fade-in fade-in-delay-3">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1710839359629-353f10995dac?w=600&q=80&auto=format&fit=crop" alt="Advanced skin technology device" loading="lazy" />
+        </div>
+        <div class="service-body">
+          <div class="service-icon si-green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3DB015" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/></svg>
+          </div>
+          <div class="service-name">Advanced Technology</div>
+          <div class="service-desc">LED light therapy, radiofrequency lifting, ultrasound skin tightening — modern tools for dramatic, lasting results.</div>
+          <div class="service-tag">
+            Next-gen skin tech
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Consultations -->
+      <div class="service-card fade-in fade-in-delay-4">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1693004925174-d9e06209d0ee?w=600&q=80&auto=format&fit=crop" alt="Skin consultation and analysis" loading="lazy" />
+        </div>
+        <div class="service-body">
+          <div class="service-icon si-teal">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A5C52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="service-name">Skin Consultations</div>
+          <div class="service-desc">One-on-one expert analysis of your skin — we identify your concerns and design a personalised treatment roadmap.</div>
+          <div class="service-tag">
+            Personalised plans
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── TECHNOLOGY ── -->
+<section class="tech-section" id="technology" aria-labelledby="tech-heading">
+  <div class="container">
+    <div class="tech-inner">
+      <div class="tech-image fade-in">
+        <img src="https://images.unsplash.com/photo-1677682692769-e7250eda8a8b?w=900&q=85&auto=format&fit=crop" alt="Advanced skincare technology treatment" loading="lazy" />
+        <div class="tech-image-badge">
+          <div class="tech-badge-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3DB015" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="tech-badge-title">Clinically Proven</div>
+            <div class="tech-badge-sub">Safe for all skin tones</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-tag fade-in">Our Technology</div>
+        <h2 class="section-title fade-in fade-in-delay-1" id="tech-heading">
+          Where Science<br/>Meets <em style="font-style:italic;color:var(--teal)">Skincare</em>
+        </h2>
+        <p class="section-sub fade-in fade-in-delay-2">
+          We invest in the most advanced, clinically validated skincare technologies available — so your results are real, measurable, and lasting.
+        </p>
+        <div class="tech-features">
+          <div class="tech-feature fade-in fade-in-delay-1">
+            <div class="tech-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#86EFAC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            </div>
+            <div>
+              <div class="tech-feature-title">LED Light Therapy</div>
+              <div class="tech-feature-desc">Targeted wavelengths of light stimulate collagen production, reduce inflammation, and accelerate skin repair at the cellular level.</div>
+            </div>
+          </div>
+          <div class="tech-feature fade-in fade-in-delay-2">
+            <div class="tech-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#86EFAC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div>
+              <div class="tech-feature-title">Radiofrequency Lifting</div>
+              <div class="tech-feature-desc">Non-invasive RF energy tightens loose skin, contours facial features, and smooths fine lines — no downtime required.</div>
+            </div>
+          </div>
+          <div class="tech-feature fade-in fade-in-delay-3">
+            <div class="tech-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#86EFAC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/></svg>
+            </div>
+            <div>
+              <div class="tech-feature-title">Ultrasound Skin Therapy</div>
+              <div class="tech-feature-desc">Deep-penetrating ultrasound waves rejuvenate at the dermis layer, delivering visible lifting and firmness that gets better over time.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stripe" aria-hidden="true"></div>
+
+<!-- ── PRODUCTS ── -->
+<section class="products" id="products" aria-labelledby="products-heading">
+  <div class="products-inner">
+    <div>
+      <div class="section-tag fade-in">Our Products</div>
+      <h2 class="section-title fade-in fade-in-delay-1" id="products-heading">
+        Premium Skincare<br/>You Can Trust
+      </h2>
+      <p class="section-sub fade-in fade-in-delay-2">
+        Every product in our range is hand-selected for efficacy, safety, and suitability across all skin tones and types.
+      </p>
+    </div>
+    <div class="products-list">
+      <div class="product-item fade-in fade-in-delay-1">
+        <div class="product-num">01</div>
+        <div>
+          <div class="product-name">Brightening Vitamin C Serum</div>
+          <div class="product-desc">Fades dark spots, evens skin tone, and delivers a luminous glow with stable 20% Vitamin C.</div>
+        </div>
+        <svg class="product-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+      <div class="product-item fade-in fade-in-delay-2">
+        <div class="product-num">02</div>
+        <div>
+          <div class="product-name">Deep Hydration Moisturiser</div>
+          <div class="product-desc">Hyaluronic acid complex locks in moisture for 48-hour hydration and plump, supple skin.</div>
+        </div>
+        <svg class="product-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+      <div class="product-item fade-in fade-in-delay-3">
+        <div class="product-num">03</div>
+        <div>
+          <div class="product-name">Gentle Resurfacing Cleanser</div>
+          <div class="product-desc">AHA-powered cleanser removes impurities and dead cells without stripping the skin's natural barrier.</div>
+        </div>
+        <svg class="product-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+      <div class="product-item fade-in fade-in-delay-4">
+        <div class="product-num">04</div>
+        <div>
+          <div class="product-name">Retinol Renewal Night Cream</div>
+          <div class="product-desc">Clinically tested retinol formula visibly reduces fine lines and uneven texture while you sleep.</div>
+        </div>
+        <svg class="product-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY US ── -->
+<section class="why" id="why" aria-labelledby="why-heading">
+  <div class="container">
+    <div class="section-tag fade-in">Why Skin Solutions by 712</div>
+    <h2 class="section-title fade-in fade-in-delay-1" id="why-heading">The 712 Difference</h2>
+    <p class="section-sub fade-in fade-in-delay-2">We combine expertise, technology, and care to deliver skincare results that speak for themselves.</p>
+    <div class="why-grid">
+      <div class="why-card fade-in fade-in-delay-1">
+        <div class="why-icon wi-green">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3DB015" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="why-title">Clinically Safe</div>
+        <div class="why-desc">All treatments and products are dermatologist-approved and tested for safety across all skin tones — especially melanin-rich skin.</div>
+      </div>
+      <div class="why-card fade-in fade-in-delay-2">
+        <div class="why-icon wi-teal">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1A5C52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <div class="why-title">Personalised Care</div>
+        <div class="why-desc">No one-size-fits-all here. Every client receives a bespoke treatment plan built around their specific skin goals and concerns.</div>
+      </div>
+      <div class="why-card fade-in fade-in-delay-3">
+        <div class="why-icon wi-light">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div class="why-title">Visible Results</div>
+        <div class="why-desc">Our clients see real, measurable improvements — brighter complexion, smoother texture, reduced spots — often after just one session.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials" id="testimonials" aria-labelledby="testimonials-heading">
+  <div class="container">
+    <div class="section-tag fade-in">Client Stories</div>
+    <h2 class="section-title fade-in fade-in-delay-1" id="testimonials-heading">Real Results, Real People</h2>
+    <p class="section-sub fade-in fade-in-delay-2">Our clients' skin transformations say more than words ever could.</p>
+    <div class="testimonials-grid">
+      <div class="testi-card fade-in fade-in-delay-1">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span>
+        </div>
+        <p class="testi-text">"After two sessions of the LED therapy facial, my hyperpigmentation has visibly faded. My skin hasn't looked this even and bright in years. Truly life-changing."</p>
+        <div class="testi-author">
+          <div class="testi-avatar av-green" aria-hidden="true">A</div>
+          <div><div class="testi-name">Akua B.</div><div class="testi-role">Facial Treatment Client</div></div>
+        </div>
+      </div>
+      <div class="testi-card fade-in fade-in-delay-2">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span>
+        </div>
+        <p class="testi-text">"I was sceptical about the RF lifting treatment but the results after one month were undeniable. My skin feels firmer, tighter, and people keep asking if I've lost weight in my face!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar av-teal" aria-hidden="true">E</div>
+          <div><div class="testi-name">Esi M.</div><div class="testi-role">RF Lifting Client</div></div>
+        </div>
+      </div>
+      <div class="testi-card fade-in fade-in-delay-3">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span>
+        </div>
+        <p class="testi-text">"The skin consultation was so thorough. They identified issues I didn't even know I had and put me on the right product routine. My skin is clearer and healthier than ever."</p>
+        <div class="testi-author">
+          <div class="testi-avatar av-mid" aria-hidden="true">N</div>
+          <div><div class="testi-name">Nana K.</div><div class="testi-role">Skincare Consultation Client</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section" id="contact" aria-labelledby="cta-heading">
+  <div class="cta-inner">
+    <div class="cta-tag fade-in">Start Your Journey</div>
+    <h2 class="cta-title fade-in fade-in-delay-1" id="cta-heading">
+      Your Best Skin<br/>is <em>Waiting</em>
+    </h2>
+    <p class="cta-sub fade-in fade-in-delay-2">Book a personalised skin consultation today and let our experts craft the treatment plan your skin deserves.</p>
+    <a href="tel:" class="btn-cta fade-in fade-in-delay-3">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Book Your Consultation
+    </a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">
+        <img src="logo.jpeg" alt="Skin Solutions by 712" />
+      </div>
+      <p class="footer-tagline">Advanced skincare solutions powered by modern technology and nature's finest ingredients. Reveal your best skin with Skin Solutions by 712.</p>
+      <div class="social-links">
+        <a href="#" class="social-link" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" class="social-link" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" class="social-link" aria-label="TikTok">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+        </a>
+        <a href="#" class="social-link" aria-label="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul class="footer-links">
+        <li><a href="#services">Facial Treatments</a></li>
+        <li><a href="#products">Skincare Products</a></li>
+        <li><a href="#technology">Advanced Technology</a></li>
+        <li><a href="#services">Skin Consultations</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul class="footer-links">
+        <li><a href="#why">About Us</a></li>
+        <li><a href="#testimonials">Client Stories</a></li>
+        <li><a href="#contact">Book Now</a></li>
+        <li><a href="tel:">Call Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Skin Solutions by 712. All rights reserved.</span>
+    <span>Science + Nature = <em style="color:#86EFAC">Your Best Skin</em></span>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+    mobileMenu.setAttribute('aria-hidden', String(!open));
+  });
+  document.querySelectorAll('.mobile-link, .mobile-menu .btn-book').forEach(l => {
+    l.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    });
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const t = document.querySelector(this.getAttribute('href'));
+      if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); }
+    });
+  });
+
+  // Slideshow
+  const slides   = document.querySelectorAll('.hero-slide');
+  const dots     = document.querySelectorAll('.dot');
+  const captions = document.querySelectorAll('.caption-slide');
+  let current = 0, timer;
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    dots[current].setAttribute('aria-selected', 'false');
+    if (captions[current]) captions[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    dots[current].setAttribute('aria-selected', 'true');
+    if (captions[current]) captions[current].classList.add('active');
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(current + 1), 5500);
+  }
+
+  document.getElementById('slideNext').addEventListener('click', () => { goTo(current + 1); startTimer(); });
+  document.getElementById('slidePrev').addEventListener('click', () => { goTo(current - 1); startTimer(); });
+  dots.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); startTimer(); }));
+  startTimer();
+
+  document.querySelector('.hero').addEventListener('mouseenter', () => clearInterval(timer));
+  document.querySelector('.hero').addEventListener('mouseleave', startTimer);
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  setTimeout(() => {
+    document.querySelectorAll('.hero .fade-in').forEach(el => el.classList.add('visible'));
+  }, 150);
+
+  // Count-up
+  function animateCount(el, target) {
+    let val = 0; const step = target / 80;
+    const t = setInterval(() => {
+      val += step;
+      if (val >= target) { el.textContent = target + '+'; clearInterval(t); }
+      else el.textContent = Math.floor(val) + '+';
+    }, 18);
+  }
+  const countObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animateCount(e.target, parseInt(e.target.dataset.count)); countObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => countObs.observe(el));
+</script>
+</body>
+</html>
