@@ -5,11 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Skin Solutions by 712 — Advanced Skincare & Facial Treatments</title>
   <meta name="description" content="Skin Solutions by 712 — Premium skincare products and advanced facial treatments powered by modern technology. Reveal your best skin." />
+  <link rel="icon" href="logo.jpeg" type="image/jpeg" />
+  <!-- Preload the LCP hero image — media-scoped so each viewport fetches only its size -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1609535895148-cf9f5c446290?w=1920&q=85&auto=format&fit=crop" fetchpriority="high" media="(min-width: 769px)" />
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1609535895148-cf9f5c446290?w=800&q=75&auto=format&fit=crop" fetchpriority="high" media="(max-width: 768px)" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Non-blocking font load: preload the CSS, then promote to stylesheet on load -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" /></noscript>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Size-adjusted fallback fonts reduce CLS when custom fonts swap in */
+    @font-face {
+      font-family: 'DM Sans Fallback';
+      src: local('Arial'), local('Helvetica Neue');
+      ascent-override: 94%;
+      descent-override: 24%;
+      line-gap-override: 0%;
+      size-adjust: 104%;
+    }
+    @font-face {
+      font-family: 'Cormorant Garamond Fallback';
+      src: local('Georgia'), local('Times New Roman');
+      ascent-override: 91%;
+      descent-override: 23%;
+      line-gap-override: 0%;
+      size-adjust: 110%;
+    }
 
     :root {
       --green:       #3DB015;
@@ -27,7 +51,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'DM Sans', 'DM Sans Fallback', sans-serif;
       color: var(--dark);
       background: var(--white);
       overflow-x: hidden;
@@ -35,7 +59,7 @@
     }
 
     h1, h2, h3, h4 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Cormorant Garamond', 'Cormorant Garamond Fallback', serif;
       line-height: 1.15;
     }
 
@@ -138,6 +162,13 @@
     .hero-slide:nth-child(4) {
       background-image: url('https://images.unsplash.com/photo-1702261952318-241e4594b2f5?w=1920&q=85&auto=format&fit=crop');
     }
+    /* Smaller hero images on mobile to reduce payload */
+    @media (max-width: 768px) {
+      .hero-slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1609535895148-cf9f5c446290?w=800&q=75&auto=format&fit=crop'); }
+      .hero-slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1693004927824-f2623bbedc8b?w=800&q=75&auto=format&fit=crop'); }
+      .hero-slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1648203276014-20f97ba1f817?w=800&q=75&auto=format&fit=crop'); }
+      .hero-slide:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1702261952318-241e4594b2f5?w=800&q=75&auto=format&fit=crop'); }
+    }
 
     .hero-overlay {
       position: absolute; inset: 0; z-index: 1;
@@ -239,7 +270,7 @@
 
     .hero-stats { display: flex; gap: 40px; margin-top: 48px; flex-wrap: wrap; }
     .hero-stat-num {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Cormorant Garamond', 'Cormorant Garamond Fallback', serif;
       font-size: 2.2rem; font-weight: 600; color: var(--white); display: block;
     }
     .hero-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
@@ -262,7 +293,7 @@
       color: #86EFAC; margin-bottom: 8px;
     }
     .caption-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Cormorant Garamond', 'Cormorant Garamond Fallback', serif;
       font-size: 1.5rem; font-weight: 600; color: var(--white);
       margin-bottom: 8px;
     }
@@ -353,7 +384,7 @@
     .si-teal  { background: rgba(26,92,82,0.1); }
 
     .service-name {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Cormorant Garamond', 'Cormorant Garamond Fallback', serif;
       font-size: 1.2rem; font-weight: 600; color: var(--dark); margin-bottom: 8px;
     }
     .service-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.65; font-weight: 300; }
@@ -424,7 +455,7 @@
     }
     .product-item:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); }
     .product-num {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Cormorant Garamond', 'Cormorant Garamond Fallback', serif;
       font-size: 1.5rem; font-weight: 700; color: var(--green);
       min-width: 32px;
     }
@@ -453,7 +484,7 @@
     .wi-light { background: var(--green-mid); }
 
     .why-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Cormorant Garamond', 'Cormorant Garamond Fallback', serif;
       font-size: 1.3rem; font-weight: 600; color: var(--dark); margin-bottom: 10px;
     }
     .why-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.7; font-weight: 300; }
@@ -469,7 +500,7 @@
     }
     .testi-card::before {
       content: '"';
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Cormorant Garamond', 'Cormorant Garamond Fallback', serif;
       font-size: 5rem; line-height: 1;
       color: var(--green); opacity: 0.15;
       position: absolute; top: 16px; left: 22px;
@@ -484,7 +515,7 @@
     .testi-avatar {
       width: 40px; height: 40px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Cormorant Garamond', 'Cormorant Garamond Fallback', serif;
       font-weight: 700; font-size: 1.1rem; color: var(--white); flex-shrink: 0;
     }
     .av-green { background: linear-gradient(135deg, var(--green), #2D8A0E); }
@@ -517,7 +548,7 @@
       font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 20px;
     }
     .cta-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Cormorant Garamond', 'Cormorant Garamond Fallback', serif;
       font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 600;
       color: var(--white); margin-bottom: 16px;
     }
@@ -545,7 +576,7 @@
 
     .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
     .footer-logo img { height: 44px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.9; }
-    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--white); }
+    .footer-brand { font-family: 'Cormorant Garamond', 'Cormorant Garamond Fallback', serif; font-size: 1.4rem; font-weight: 600; color: var(--white); }
     .footer-tagline { font-size: 0.88rem; margin-bottom: 24px; line-height: 1.7; font-weight: 300; }
 
     .social-links { display: flex; gap: 10px; }
@@ -558,7 +589,7 @@
     .social-link:hover { background: var(--green); border-color: var(--green); color: var(--white); transform: translateY(-2px); }
 
     .footer-col h4 {
-      font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 700;
+      font-family: 'DM Sans', 'DM Sans Fallback', sans-serif; font-size: 0.75rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.1em; color: var(--white); margin-bottom: 20px;
     }
     .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
@@ -616,7 +647,7 @@
 <nav class="nav" id="navbar" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo" aria-label="Skin Solutions by 712 Home">
-      <img src="logo.jpeg" alt="Skin Solutions by 712" />
+      <img src="logo.jpeg" alt="Skin Solutions by 712" width="904" height="882" fetchpriority="high" />
     </a>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
@@ -765,7 +796,7 @@
       <!-- Facials -->
       <div class="service-card fade-in fade-in-delay-1">
         <div class="service-img">
-          <img src="https://images.unsplash.com/photo-1609535895148-cf9f5c446290?w=600&q=80&auto=format&fit=crop" alt="Professional facial treatment" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1609535895148-cf9f5c446290?w=600&q=80&auto=format&fit=crop" alt="Professional facial treatment" loading="lazy" decoding="async" />
         </div>
         <div class="service-body">
           <div class="service-icon si-green">
@@ -783,7 +814,7 @@
       <!-- Products -->
       <div class="service-card fade-in fade-in-delay-2">
         <div class="service-img">
-          <img src="https://images.unsplash.com/photo-1577746838851-816a43ca8733?w=600&q=80&auto=format&fit=crop" alt="Premium skincare products" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1577746838851-816a43ca8733?w=600&q=80&auto=format&fit=crop" alt="Premium skincare products" loading="lazy" decoding="async" />
         </div>
         <div class="service-body">
           <div class="service-icon si-teal">
@@ -801,7 +832,7 @@
       <!-- Technology -->
       <div class="service-card fade-in fade-in-delay-3">
         <div class="service-img">
-          <img src="https://images.unsplash.com/photo-1710839359629-353f10995dac?w=600&q=80&auto=format&fit=crop" alt="Advanced skin technology device" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1710839359629-353f10995dac?w=600&q=80&auto=format&fit=crop" alt="Advanced skin technology device" loading="lazy" decoding="async" />
         </div>
         <div class="service-body">
           <div class="service-icon si-green">
@@ -819,7 +850,7 @@
       <!-- Consultations -->
       <div class="service-card fade-in fade-in-delay-4">
         <div class="service-img">
-          <img src="https://images.unsplash.com/photo-1693004925174-d9e06209d0ee?w=600&q=80&auto=format&fit=crop" alt="Skin consultation and analysis" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1693004925174-d9e06209d0ee?w=600&q=80&auto=format&fit=crop" alt="Skin consultation and analysis" loading="lazy" decoding="async" />
         </div>
         <div class="service-body">
           <div class="service-icon si-teal">
@@ -843,7 +874,7 @@
   <div class="container">
     <div class="tech-inner">
       <div class="tech-image fade-in">
-        <img src="https://images.unsplash.com/photo-1677682692769-e7250eda8a8b?w=900&q=85&auto=format&fit=crop" alt="Advanced skincare technology treatment" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1677682692769-e7250eda8a8b?w=900&q=85&auto=format&fit=crop" alt="Advanced skincare technology treatment" loading="lazy" decoding="async" />
         <div class="tech-image-badge">
           <div class="tech-badge-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3DB015" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -1040,7 +1071,7 @@
   <div class="footer-inner">
     <div>
       <div class="footer-logo">
-        <img src="logo.jpeg" alt="Skin Solutions by 712" />
+        <img src="logo.jpeg" alt="Skin Solutions by 712" width="904" height="882" loading="lazy" decoding="async" />
       </div>
       <p class="footer-tagline">Advanced skincare solutions powered by modern technology and nature's finest ingredients. Reveal your best skin with Skin Solutions by 712.</p>
       <div class="social-links">
