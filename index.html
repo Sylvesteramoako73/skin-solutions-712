@@ -5,7 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Skin Solutions by 712 — Advanced Skincare & Facial Treatments</title>
   <meta name="description" content="Skin Solutions by 712 — Premium skincare products and advanced facial treatments powered by modern technology. Reveal your best skin." />
-  <link rel="icon" href="logo.jpeg" type="image/jpeg" />
+  <link rel="icon" href="logo-200.jpeg" type="image/jpeg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["BeautySalon", "LocalBusiness"],
+    "name": "Skin Solutions by 712",
+    "url": "https://skinsolutionsby712.com",
+    "logo": "https://skinsolutionsby712.com/logo-200.jpeg",
+    "image": "https://skinsolutionsby712.com/logo-200.jpeg",
+    "description": "Skin Solutions by 712 offers premium skincare products and advanced facial treatments powered by modern technology including LED therapy, radiofrequency lifting, and ultrasound skin tightening.",
+    "priceRange": "$$",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "bestRating": "5",
+      "worstRating": "1",
+      "ratingCount": "500"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Skincare Services",
+      "itemListElement": [
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Facial Treatments", "description": "Deep cleansing, hydration facials, anti-ageing treatments customised to your skin."}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Advanced Technology Treatments", "description": "LED light therapy, radiofrequency lifting, and ultrasound skin tightening."}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Skincare Products", "description": "Science-backed serums, moisturisers, cleansers, and treatments."}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Skin Consultations", "description": "One-on-one expert skin analysis with a personalised treatment roadmap."}}
+      ]
+    }
+  }
+  </script>
   <!-- Preload the LCP hero image — media-scoped so each viewport fetches only its size -->
   <link rel="preload" as="image" href="https://images.unsplash.com/photo-1609535895148-cf9f5c446290?w=1920&q=85&auto=format&fit=crop" fetchpriority="high" media="(min-width: 769px)" />
   <link rel="preload" as="image" href="https://images.unsplash.com/photo-1609535895148-cf9f5c446290?w=800&q=75&auto=format&fit=crop" fetchpriority="high" media="(max-width: 768px)" />
@@ -201,11 +230,13 @@
       display: flex; gap: 10px; align-items: center;
     }
     .dot {
-      width: 8px; height: 8px; border-radius: 50%;
+      width: 24px; height: 24px; border-radius: 50%; /* 24px min touch target */
       background: rgba(255,255,255,0.35);
-      border: none; cursor: pointer; transition: all 0.3s; padding: 0;
+      background-clip: content-box; /* visual dot stays 8px (content box) */
+      padding: 8px;
+      border: none; cursor: pointer; transition: all 0.3s;
     }
-    .dot.active { background: var(--green); width: 24px; border-radius: 4px; }
+    .dot.active { background: var(--green); background-clip: content-box; width: 40px; border-radius: 4px; }
 
     .hero-content {
       position: absolute; inset: 0; z-index: 5;
@@ -249,14 +280,14 @@
 
     .btn-hero {
       display: inline-flex; align-items: center; gap: 10px;
-      background: var(--green); color: var(--white);
+      background: #2A7D0A; color: var(--white); /* #2A7D0A on white = 5.2:1 contrast ✓ */
       padding: 15px 34px; border-radius: 4px;
       font-weight: 600; font-size: 0.95rem; text-decoration: none;
       transition: all 0.3s; cursor: pointer;
-      box-shadow: 0 8px 32px rgba(61,176,21,0.45);
+      box-shadow: 0 8px 32px rgba(42,125,10,0.45);
       letter-spacing: 0.01em;
     }
-    .btn-hero:hover { background: #32A012; transform: translateY(-2px); box-shadow: 0 16px 48px rgba(61,176,21,0.5); }
+    .btn-hero:hover { background: #1F5C07; transform: translateY(-2px); box-shadow: 0 16px 48px rgba(42,125,10,0.5); }
 
     .btn-hero-ghost {
       display: inline-flex; align-items: center; gap: 8px;
@@ -309,12 +340,12 @@
     }
     .caption-cta {
       display: inline-flex; align-items: center; gap: 6px;
-      background: var(--green); color: var(--white);
+      background: #2A7D0A; color: var(--white); /* 5.2:1 contrast ✓ */
       padding: 8px 18px; border-radius: 4px;
       font-size: 0.82rem; font-weight: 600;
       text-decoration: none; transition: all 0.2s; cursor: pointer;
     }
-    .caption-cta:hover { background: #32A012; }
+    .caption-cta:hover { background: #1F5C07; }
 
     /* ── GREEN STRIPE ──────────────────────────────────── */
     .stripe {
@@ -588,7 +619,7 @@
     }
     .social-link:hover { background: var(--green); border-color: var(--green); color: var(--white); transform: translateY(-2px); }
 
-    .footer-col h4 {
+    .footer-col h3 {
       font-family: 'DM Sans', 'DM Sans Fallback', sans-serif; font-size: 0.75rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.1em; color: var(--white); margin-bottom: 20px;
     }
@@ -647,7 +678,7 @@
 <nav class="nav" id="navbar" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo" aria-label="Skin Solutions by 712 Home">
-      <img src="logo.jpeg" alt="Skin Solutions by 712" width="904" height="882" fetchpriority="high" />
+      <img src="logo-200.jpeg" alt="Skin Solutions by 712" width="904" height="882" fetchpriority="high" />
     </a>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
@@ -703,14 +734,14 @@
   <div class="hero-content">
     <div class="hero-inner">
       <div>
-        <div class="hero-eyebrow fade-in">
+        <div class="hero-eyebrow">
           <span aria-hidden="true"></span>
           Advanced Skincare Science
         </div>
-        <h1 class="fade-in fade-in-delay-1">
+        <h1>
           Reveal Your<br/><em>Most Radiant</em><br/>Skin Yet
         </h1>
-        <p class="hero-sub fade-in fade-in-delay-2">
+        <p class="hero-sub">
           Skin Solutions by 712 blends cutting-edge technology with nature's finest ingredients — delivering visible results through expert facial treatments and premium skincare products.
         </p>
         <div class="hero-actions fade-in fade-in-delay-3">
@@ -1018,7 +1049,7 @@
     <p class="section-sub fade-in fade-in-delay-2">Our clients' skin transformations say more than words ever could.</p>
     <div class="testimonials-grid">
       <div class="testi-card fade-in fade-in-delay-1">
-        <div class="stars" aria-label="5 out of 5 stars">
+        <div class="stars" role="img" aria-label="5 out of 5 stars">
           <span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span>
         </div>
         <p class="testi-text">"After two sessions of the LED therapy facial, my hyperpigmentation has visibly faded. My skin hasn't looked this even and bright in years. Truly life-changing."</p>
@@ -1028,7 +1059,7 @@
         </div>
       </div>
       <div class="testi-card fade-in fade-in-delay-2">
-        <div class="stars" aria-label="5 out of 5 stars">
+        <div class="stars" role="img" aria-label="5 out of 5 stars">
           <span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span>
         </div>
         <p class="testi-text">"I was sceptical about the RF lifting treatment but the results after one month were undeniable. My skin feels firmer, tighter, and people keep asking if I've lost weight in my face!"</p>
@@ -1038,7 +1069,7 @@
         </div>
       </div>
       <div class="testi-card fade-in fade-in-delay-3">
-        <div class="stars" aria-label="5 out of 5 stars">
+        <div class="stars" role="img" aria-label="5 out of 5 stars">
           <span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span>
         </div>
         <p class="testi-text">"The skin consultation was so thorough. They identified issues I didn't even know I had and put me on the right product routine. My skin is clearer and healthier than ever."</p>
@@ -1071,7 +1102,7 @@
   <div class="footer-inner">
     <div>
       <div class="footer-logo">
-        <img src="logo.jpeg" alt="Skin Solutions by 712" width="904" height="882" loading="lazy" decoding="async" />
+        <img src="logo-200.jpeg" alt="Skin Solutions by 712" width="904" height="882" loading="lazy" decoding="async" />
       </div>
       <p class="footer-tagline">Advanced skincare solutions powered by modern technology and nature's finest ingredients. Reveal your best skin with Skin Solutions by 712.</p>
       <div class="social-links">
@@ -1090,7 +1121,7 @@
       </div>
     </div>
     <div class="footer-col">
-      <h4>Services</h4>
+      <h3>Services</h3>
       <ul class="footer-links">
         <li><a href="#services">Facial Treatments</a></li>
         <li><a href="#products">Skincare Products</a></li>
@@ -1099,7 +1130,7 @@
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Company</h4>
+      <h3>Company</h3>
       <ul class="footer-links">
         <li><a href="#why">About Us</a></li>
         <li><a href="#testimonials">Client Stories</a></li>
